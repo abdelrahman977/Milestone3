@@ -305,7 +305,7 @@ public class SecondTask extends Task {
 
 	}
 
-	public ArrayList<Champion> getWinners() {
+	public ArrayList<Champion> getWinners()  {
 		return winners;
 	}
 
