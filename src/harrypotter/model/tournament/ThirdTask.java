@@ -1,5 +1,6 @@
 package harrypotter.model.tournament;
 
+import harrypotter.exceptions.OutOfBordersException;
 import harrypotter.model.character.Champion;
 import harrypotter.model.character.Wizard;
 import harrypotter.model.world.Cell;
@@ -106,7 +107,7 @@ public class ThirdTask extends Task {
 
 	}
 
-	public void moveForward() throws IOException {
+	public void moveForward() throws IOException,OutOfBordersException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 
@@ -130,7 +131,7 @@ public class ThirdTask extends Task {
 		}
 	}
 
-	public void moveBackward() throws IOException {
+	public void moveBackward() throws IOException,OutOfBordersException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 
@@ -154,7 +155,7 @@ public class ThirdTask extends Task {
 		}
 	}
 
-	public void moveLeft() throws IOException {
+	public void moveLeft() throws IOException,OutOfBordersException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 
@@ -178,7 +179,7 @@ public class ThirdTask extends Task {
 		}
 	}
 
-	public void moveRight() throws IOException {
+	public void moveRight() throws IOException,OutOfBordersException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 

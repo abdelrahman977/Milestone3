@@ -1,5 +1,7 @@
 package harrypotter.model.tournament;
 
+import harrypotter.exceptions.InvalidActionException;
+import harrypotter.exceptions.OutOfBordersException;
 import harrypotter.model.character.Champion;
 import harrypotter.model.character.HufflepuffWizard;
 import harrypotter.model.character.Wizard;
@@ -125,7 +127,7 @@ public abstract class Task implements WizardListener {
 		}
 	}
 
-	public void moveForward() throws IOException {
+	public void moveForward() throws IOException,OutOfBordersException {
 
 		Wizard current = (Wizard) currentChamp;
 		Point location = current.getLocation();
@@ -145,7 +147,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void moveBackward() throws IOException {
+	public void moveBackward() throws IOException,OutOfBordersException {
 
 		Wizard current = (Wizard) currentChamp;
 		Point location = current.getLocation();
@@ -165,7 +167,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void moveLeft() throws IOException {
+	public void moveLeft() throws IOException,OutOfBordersException {
 
 		Wizard current = (Wizard) currentChamp;
 		Point location = current.getLocation();
@@ -185,7 +187,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void moveRight() throws IOException {
+	public void moveRight() throws IOException,OutOfBordersException {
 
 		Wizard current = (Wizard) currentChamp;
 		Point location = current.getLocation();
@@ -205,7 +207,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public Point getTargetPoint(Direction d) {
+	public Point getTargetPoint(Direction d) throws OutOfBordersException {
 
 		Point target = null;
 		Point currentLocation = ((Wizard) currentChamp).getLocation();
@@ -224,7 +226,7 @@ public abstract class Task implements WizardListener {
 	}
 
 	public void castDamagingSpell(DamagingSpell spell, Direction d)
-			throws IOException {
+			throws IOException,OutOfBordersException  {
 
 		Point target = getTargetPoint(d);
 
@@ -268,7 +270,7 @@ public abstract class Task implements WizardListener {
 	}
 
 	public void castRelocatingSpell(RelocatingSpell spell, Direction d,
-			Direction t, int range) throws IOException {
+			Direction t, int range) throws IOException,OutOfBordersException {
 
 		Point target = getTargetPoint(d);
 		int newX = ((Wizard) currentChamp).getLocation().x;
