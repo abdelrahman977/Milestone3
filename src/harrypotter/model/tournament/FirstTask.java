@@ -1,5 +1,8 @@
 package harrypotter.model.tournament;
 
+import harrypotter.exceptions.InCooldownException;
+import harrypotter.exceptions.InvalidTargetCellException;
+import harrypotter.exceptions.OutOfBordersException;
 import harrypotter.model.character.Champion;
 import harrypotter.model.character.HufflepuffWizard;
 import harrypotter.model.character.Wizard;
@@ -194,7 +197,7 @@ public class FirstTask extends Task {
 
 	}
 
-	public void onSlytherinTrait(Direction d) throws IOException {
+	public void onSlytherinTrait(Direction d) throws IOException, InCooldownException, InvalidTargetCellException, OutOfBordersException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 		current.setTraitCooldown(6);

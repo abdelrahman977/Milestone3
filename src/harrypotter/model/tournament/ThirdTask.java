@@ -1,5 +1,7 @@
 package harrypotter.model.tournament;
 
+import harrypotter.exceptions.InCooldownException;
+import harrypotter.exceptions.InvalidTargetCellException;
 import harrypotter.exceptions.OutOfBordersException;
 import harrypotter.model.character.Champion;
 import harrypotter.model.character.Wizard;
@@ -107,7 +109,7 @@ public class ThirdTask extends Task {
 
 	}
 
-	public void moveForward() throws IOException,OutOfBordersException {
+	public void moveForward() throws IOException,OutOfBordersException, InvalidTargetCellException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 
@@ -131,7 +133,7 @@ public class ThirdTask extends Task {
 		}
 	}
 
-	public void moveBackward() throws IOException,OutOfBordersException {
+	public void moveBackward() throws IOException,OutOfBordersException, InvalidTargetCellException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 
@@ -155,7 +157,7 @@ public class ThirdTask extends Task {
 		}
 	}
 
-	public void moveLeft() throws IOException,OutOfBordersException {
+	public void moveLeft() throws IOException,OutOfBordersException, InvalidTargetCellException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 
@@ -179,7 +181,7 @@ public class ThirdTask extends Task {
 		}
 	}
 
-	public void moveRight() throws IOException,OutOfBordersException {
+	public void moveRight() throws IOException,OutOfBordersException, InvalidTargetCellException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 
@@ -203,7 +205,7 @@ public class ThirdTask extends Task {
 		}
 	}
 
-	public void onSlytherinTrait(Direction d) throws IOException {
+	public void onSlytherinTrait(Direction d) throws IOException, InCooldownException, InvalidTargetCellException, OutOfBordersException {
 
 		Wizard current = (Wizard) getCurrentChamp();
 		current.setTraitCooldown(10);

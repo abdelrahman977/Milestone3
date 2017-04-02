@@ -1,7 +1,10 @@
 package harrypotter.model.tournament;
 
+import harrypotter.exceptions.InCooldownException;
 import harrypotter.exceptions.InvalidActionException;
+import harrypotter.exceptions.InvalidTargetCellException;
 import harrypotter.exceptions.OutOfBordersException;
+import harrypotter.exceptions.OutOfRangeException;
 import harrypotter.model.character.Champion;
 import harrypotter.model.character.HufflepuffWizard;
 import harrypotter.model.character.Wizard;
@@ -127,7 +130,7 @@ public abstract class Task implements WizardListener {
 		}
 	}
 
-	public void moveForward() throws IOException,OutOfBordersException {
+	public void moveForward() throws IOException,OutOfBordersException,InvalidTargetCellException {
 
 		Wizard current = (Wizard) currentChamp;
 		Point location = current.getLocation();
@@ -147,7 +150,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void moveBackward() throws IOException,OutOfBordersException {
+	public void moveBackward() throws IOException,OutOfBordersException,InvalidTargetCellException {
 
 		Wizard current = (Wizard) currentChamp;
 		Point location = current.getLocation();
@@ -167,7 +170,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void moveLeft() throws IOException,OutOfBordersException {
+	public void moveLeft() throws IOException,OutOfBordersException,InvalidTargetCellException {
 
 		Wizard current = (Wizard) currentChamp;
 		Point location = current.getLocation();
@@ -187,7 +190,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void moveRight() throws IOException,OutOfBordersException {
+	public void moveRight() throws IOException,OutOfBordersException,InvalidTargetCellException {
 
 		Wizard current = (Wizard) currentChamp;
 		Point location = current.getLocation();
@@ -226,7 +229,7 @@ public abstract class Task implements WizardListener {
 	}
 
 	public void castDamagingSpell(DamagingSpell spell, Direction d)
-			throws IOException,OutOfBordersException  {
+			throws IOException,OutOfBordersException, InCooldownException,InvalidTargetCellException {
 
 		Point target = getTargetPoint(d);
 
@@ -270,7 +273,7 @@ public abstract class Task implements WizardListener {
 	}
 
 	public void castRelocatingSpell(RelocatingSpell spell, Direction d,
-			Direction t, int range) throws IOException,OutOfBordersException {
+			Direction t, int range) throws IOException,OutOfBordersException, InCooldownException,InvalidTargetCellException,OutOfRangeException {
 
 		Point target = getTargetPoint(d);
 		int newX = ((Wizard) currentChamp).getLocation().x;
@@ -308,7 +311,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void castHealingSpell(HealingSpell spell) throws IOException {
+	public void castHealingSpell(HealingSpell spell) throws IOException, InCooldownException {
 
 		Wizard current = (Wizard) currentChamp;
 		int newHp = current.getHp() + spell.getHealingAmount();
@@ -324,7 +327,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void useSpell(Spell spell) {
+	public void useSpell(Spell spell)throws InCooldownException {
 
 		spell.setCoolDown(spell.getDefaultCooldown());
 
@@ -384,7 +387,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void onGryffindorTrait() {
+	public void onGryffindorTrait() throws InCooldownException {
 
 		allowedMoves = 2;
 		((Wizard) currentChamp).setTraitCooldown(4);
@@ -392,7 +395,7 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void onSlytherinTrait(Direction d) throws IOException {
+	public void onSlytherinTrait(Direction d) throws IOException,InCooldownException,InvalidTargetCellException,OutOfBordersException{
 
 		Wizard current = (Wizard) currentChamp;
 		int newX = current.getLocation().x;
@@ -417,14 +420,14 @@ public abstract class Task implements WizardListener {
 
 	}
 
-	public void onHufflepuffTrait() {
+	public void onHufflepuffTrait() throws InCooldownException {
 
 		traitActivated = true;
 		((Wizard) currentChamp).setTraitCooldown(3);
 
 	}
 
-	public abstract Object onRavenclawTrait();
+	public abstract Object onRavenclawTrait() throws InCooldownException ;
 
 	public ArrayList<Champion> getChampions() {
 		return champions;
